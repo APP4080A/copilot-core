@@ -94,7 +94,7 @@ export default function LoginPage() {
   return (
       <div className="login-container">
         <div className="login-box">
-          <img src={logo} alt="Co-pilot Logo" className="login-icon" />
+          <img src={logo} alt="login" className="login-icon" />
           <h2>Log In</h2>
           <p>Start streamlining your projects and collaboration.</p>
           <form onSubmit={handleLogin}>

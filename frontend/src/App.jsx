@@ -14,12 +14,12 @@ function App() {
         <Router>
             <Routes>
                 {/* Authentication Routes */}
-                <Route path="/" element={<LoginPage />} />
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
                 {/* Main Application Routes */}
-                <Route path="/landing" element={<LandingPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/team" element={<TeamViewPage />} />
                 <Route path="/tasks" element={<TaskboardPage />} />
