@@ -62,11 +62,6 @@ function Navbar() {
                     {/* Navigation Links */}
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0"> {/* me-auto pushes other items to the right */}
                         <li className="nav-item">
-                            <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active text-primary fw-bold' : 'text-dark'}`}>
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li className="nav-item">
                             <Link to="/team" className={`nav-link ${location.pathname === '/team' ? 'active text-primary fw-bold' : 'text-dark'}`}>
                                 Team
                             </Link>
