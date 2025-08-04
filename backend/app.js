@@ -15,6 +15,8 @@ const nodemailer = require('nodemailer');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const { google } = require('googleapis');
+const cors = require('cors');
+
 require('dotenv').config();
 
 
@@ -1414,4 +1416,8 @@ process.on('SIGINT', () => {
     });
 });
 
+app.use(cors({
+  origin: 'https://copilot-core-orpin.vercel.app/', // Vercel domain
+  credentials: true
+}));
 module.exports = app;
