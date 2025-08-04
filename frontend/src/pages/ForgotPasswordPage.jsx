@@ -10,6 +10,7 @@ export default function ForgotPasswordPage() {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +25,7 @@ export default function ForgotPasswordPage() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/api/forgot-password', {
+            const response = await fetch('${apiUrl}/api/forgot-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -146,6 +146,7 @@ export default function TeamViewPage() {
     const [newTaskPriority, setNewTaskPriority] = useState('Low');
     const [newTaskMessage, setNewTaskMessage] = useState(null); // Message for new task form
     const [isCreateTeamTaskModalOpen, setIsCreateTeamTaskModalOpen] = useState(false); // New state for modal
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     // Use the global search term from context
     const { searchTerm: globalSearchTerm } = useSearch();
@@ -153,7 +154,7 @@ export default function TeamViewPage() {
 
     // Fetch team members from the backend
     const fetchTeamMembers = () => {
-        fetch('http://localhost:5000/api/users')
+        fetch('${apiUrl}/api/users')
             .then(res => res.json())
             .then(data => {
                 const membersWithRoles = data.map(user => ({
@@ -194,7 +195,7 @@ export default function TeamViewPage() {
 
     const handleUpdateMember = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:5000/api/users/${editedMember.id}`, {
+        fetch(`${apiUrl}/api/users/${editedMember.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -214,7 +215,7 @@ export default function TeamViewPage() {
 
     const handleDeleteMember = (member) => {
         if (window.confirm(`Are you sure you want to delete ${member.username}? All of their tasks will have this assignee removed.`)) {
-            fetch(`http://localhost:5000/api/users/${member.id}`, { method: 'DELETE' })
+            fetch(`${apiUrl}/api/users/${member.id}`, { method: 'DELETE' })
                 .then(res => res.json())
                 .then(data => {
                     console.log(data.message); // For debugging
@@ -246,7 +247,7 @@ export default function TeamViewPage() {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/api/users', {
+            const response = await fetch('${apiUrl}/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -8,6 +8,8 @@ import { TaskContext } from '../contexts/TaskContext';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -19,7 +21,7 @@ function DashboardPage() {
     // Fetch team members from your backend API
     const fetchTeamMembers = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/users');
+            const response = await fetch('${apiUrl}/api/users');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

@@ -9,11 +9,12 @@ const TeamTasksPage = () => {
     const [teamTasks, setTeamTasks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const fetchTeamTasks = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/team-tasks');
+                const response = await fetch('${apiUrl}/api/team-tasks');
                 if (!response.ok) {
                     throw new Error('Failed to fetch team tasks.');
                 }

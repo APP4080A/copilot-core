@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 const UserContext = createContext(null);
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -11,7 +12,7 @@ export const UserProvider = ({ children }) => {
         const token = localStorage.getItem('userToken');
         if (token) {
             try {
-                const response = await axios.get('http://localhost:5000/api/profile', {
+                const response = await axios.get('${apiUrl}/api/profile', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setUser(response.data);

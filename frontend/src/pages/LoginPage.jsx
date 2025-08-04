@@ -13,6 +13,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation(); // Get the current location object
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   // This useEffect hook handles the Google OAuth redirect
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function LoginPage() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch('${apiUrl}/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +76,7 @@ export default function LoginPage() {
 
   const handleGoogleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/google-login');
+      const response = await fetch('${apiUrl}/api/google-login');
       const data = await response.json();
       if (data.authUrl) {
         window.location.href = data.authUrl;

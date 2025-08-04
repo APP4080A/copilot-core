@@ -12,6 +12,7 @@ export default function UserProfilePage() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [avatarFile, setAvatarFile] = useState(null);
     const [avatarMessage, setAvatarMessage] = useState(null);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     // New state for password change modal
     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
@@ -64,7 +65,7 @@ export default function UserProfilePage() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/api/profile', {
+            const response = await fetch('${apiUrl}/api/profile', {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -136,7 +137,7 @@ export default function UserProfilePage() {
 
         const token = localStorage.getItem('userToken');
         try {
-            const response = await fetch('http://localhost:5000/api/change-password', {
+            const response = await fetch('${apiUrl}/api/change-password', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -170,7 +171,7 @@ export default function UserProfilePage() {
         // This will call the backend to send a password reset email
         try {
             const email = user.email;
-            const response = await fetch('http://localhost:5000/api/forgot-password', {
+            const response = await fetch('${apiUrl}/api/forgot-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
@@ -218,7 +219,7 @@ export default function UserProfilePage() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/api/profile', {
+            const response = await fetch('h${apiUrl}/api/profile', {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -261,7 +262,7 @@ export default function UserProfilePage() {
         formData.append('avatar', avatarFile);
 
         try {
-            const response = await fetch('http://localhost:5000/api/profile/avatar', {
+            const response = await fetch('${apiUrl}/api/profile/avatar', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -14,6 +14,7 @@ export default function ResetPasswordPage() {
     const [error, setError] = useState('');
     const [token, setToken] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const tokenFromUrl = searchParams.get('token');
@@ -35,7 +36,7 @@ export default function ResetPasswordPage() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/reset-password', {
+            const response = await axios.post('${apiUrl}/api/reset-password', {
                 token,
                 newPassword: password
             });

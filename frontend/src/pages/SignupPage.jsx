@@ -22,6 +22,7 @@ export default function SignupPage() {
     const token = params.get('token');
     const authError = params.get('error');
     const successMessage = params.get('message');
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     if (token) {
       // This path is for successful Google LOGIN (existing user)
@@ -75,7 +76,7 @@ export default function SignupPage() {
 
     try {
       // Send a POST request to the backend registration endpoint
-      const response = await fetch('http://localhost:5000/api/register', {
+      const response = await fetch('${apiUrl}/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +113,7 @@ export default function SignupPage() {
   const handleGoogleLogin = async () => {
     try {
       // Fetch the Google authorization URL from your backend
-      const response = await fetch('http://localhost:5000/api/google-login');
+      const response = await fetch('${apiUrl}/api/google-login');
       const data = await response.json();
       if (data.authUrl) {
         // Redirect the user's browser to Google's authentication page
