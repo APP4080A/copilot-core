@@ -2,12 +2,15 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS' // Ensure this matches your Jenkins NodeJS tool name
+        nodejs 'NodeJS' //  Jenkins NodeJS tool name
     }
 
     environment {
         FRONTEND_DIR = 'frontend'
         BACKEND_DIR = 'backend'
+         //Render deploy hook URLs
+        FRONTEND_HOOK = 'https://api.render.com/deploy/srv-d28r9uur433s73bsdp4g?key=F_eGReM6VmQ'
+        BACKEND_HOOK = 'https://api.render.com/deploy/srv-d28ri0uuk2gs73fnd0dg?key=bW1_zse0H2o'
     }
 
     stages {
@@ -81,19 +84,12 @@ pipeline {
             parallel {
                 stage('Deploy Frontend') {
                     steps {
-                        dir("${FRONTEND_DIR}\\dist") {
-                            bat 'xcopy /E /I /Y . C:\\deploy\\frontend\\'
-                        }
+                        bat "curl -X POST ${FRONTEND_HOOK}"
                     }
                 }
                 stage('Deploy Backend') {
                     steps {
-                        dir("${BACKEND_DIR}") {
-                            bat '''
-                                npm install -g pm2
-                                pm2 restart index.js || pm2 start index.js
-                            '''
-                        }
+                        bat "curl -X POST ${BACKEND_HOOK}"
                     }
                 }
             }
